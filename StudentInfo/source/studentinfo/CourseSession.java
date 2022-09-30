@@ -50,6 +50,10 @@ public class CourseSession {
         return startDate;
     }
 
+    /**
+     *
+     * @return Date the last date of the course session
+     */
     public Date getEndDate() {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(startDate);
