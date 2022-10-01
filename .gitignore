@@ -10,4 +10,4 @@
 log/
 target/
 
-.class
+*.class
