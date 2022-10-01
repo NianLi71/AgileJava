@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CourseSession {
-
     private String department;
 
     private String number;
@@ -44,6 +43,10 @@ public class CourseSession {
 
     public Student get(final int index) {
         return students.get(index);
+    }
+
+    public ArrayList<Student> getAllStudents() {
+        return this.students;
     }
 
     public Date getStartDate() {

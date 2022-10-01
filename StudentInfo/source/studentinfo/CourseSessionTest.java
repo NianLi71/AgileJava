@@ -12,7 +12,7 @@ public class CourseSessionTest extends TestCase {
     private Date startDate;
 
     public void setUp() {
-        startDate = createDate(2003, 1, 6);
+        startDate = new DateUtil().createDate(2003, 1, 6);
         session = new CourseSession("ENGL", "101", startDate);
     }
 
@@ -38,16 +38,7 @@ public class CourseSessionTest extends TestCase {
     }
 
     public void testCourseDates() {
-        Date sixteenWeeksOut = createDate(2003, 4, 25);
+        Date sixteenWeeksOut = new DateUtil().createDate(2003, 4, 25);
         assertEquals(sixteenWeeksOut, session.getEndDate());
-    }
-
-    Date createDate(int year, int month, int date) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.clear();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, date);
-        return calendar.getTime();
     }
 }
