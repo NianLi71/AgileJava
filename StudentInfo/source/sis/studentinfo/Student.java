@@ -1,6 +1,6 @@
 
 
-package studentinfo;
+package sis.studentinfo;
 
 public class Student {
     private String name;

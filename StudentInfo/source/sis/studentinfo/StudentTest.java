@@ -1,4 +1,4 @@
-package studentinfo;
+package sis.studentinfo;
 
 public class StudentTest extends junit.framework.TestCase {
     public void testCreate() {

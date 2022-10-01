@@ -1,4 +1,8 @@
-package studentinfo;
+package sis.report;
+
+import sis.studentinfo.CourseSession;
+import sis.studentinfo.Student;
+
 public class RosterReporter {
     static final String NEWLINE = System.getProperty("line.separator");
 

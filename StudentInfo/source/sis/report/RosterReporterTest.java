@@ -1,7 +1,10 @@
-package studentinfo;
+package sis.report;
 
 import junit.framework.TestCase;
 import java.util.*;
+import sis.studentinfo.DateUtil;
+import sis.studentinfo.Student;
+import sis.studentinfo.CourseSession;
 
 public class RosterReporterTest extends TestCase {
     public void testRosterReport() {
