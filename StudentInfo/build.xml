@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <project name="agileJava" default="junitgui" basedir=".">
     <property name="junitJar" value="/Users/linia/Documents/Codes/Java-Tools/lib/junit-3.8.1.jar" />
+    <property name="src" location="${basedir}" />
     <property name="src.dir" location="${basedir}/source" />
+    <property name="test.dir" location="${basedir}/test" />
     <property name="build.dir" location="${basedir}/classes" />
 
     <path id="classpath">
@@ -16,9 +18,9 @@
 <!--  similar to: javac -cp :$HOME/Documents/Codes/Java-Tools/lib/junit-3.8.1.jar sis/AllTests.java  -->
     <target name="build" depends="init" description="build all">
         <javac
-                srcdir="${src.dir}" destdir="${build.dir}"
+                srcdir="${src}" destdir="${build.dir}"
                 source="1.8"
-                deprecation="on" debug="on" optimize="off" includes="**">
+                deprecation="on" debug="on" optimize="off" includes="**/*.java">
             <classpath refid="classpath"/>
         </javac>
     </target>
