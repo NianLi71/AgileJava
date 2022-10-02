@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CourseSession {
+    private static int count = 0;
     private String department;
 
     private String number;
@@ -14,16 +15,32 @@ public class CourseSession {
 
     private Date startDate;
 
-    public CourseSession(final String department, final String number) {
-        this.department = department;
-        this.number = number;
-    }
+    private int numberOfCredits;
 
-    public CourseSession(final String department, final String number, final Date startDate) {
+    private CourseSession(final String department, final String number, final Date startDate) {
         this.department = department;
         this.number = number;
         this.startDate = startDate;
+        this.numberOfCredits = 0;
+        CourseSession.incrementCount();
     }
+
+    public static CourseSession create(final String department, final String number, final Date startDate) {
+        return new CourseSession(department, number, startDate);
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void resetCount() {
+        count = 0;
+    }
+
+    private static void incrementCount() {
+        count++;
+    }
+
 
     public String getDepartment() {
         return this.department;
@@ -38,6 +55,7 @@ public class CourseSession {
     }
 
     public void enroll(final Student student) {
+        student.addCredits(numberOfCredits);
         students.add(student);
     }
 
@@ -68,5 +86,9 @@ public class CourseSession {
         int numberOfDays = sessionLength * daysInWeek - daysFromFridayToMonday;
         calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
         return calendar.getTime();
+    }
+
+    public void setNumberOfCredits(int credits) {
+        this.numberOfCredits = credits;
     }
 }

@@ -6,14 +6,18 @@ import junit.framework.TestCase;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static sis.studentinfo.DateUtil.createDate;
+
 public class CourseSessionTest extends TestCase {
     private CourseSession session;
+
+    private static final int CREDITS = 3;
 
     private Date startDate;
 
     public void setUp() {
-        startDate = DateUtil.createDate(2003, 1, 6);
-        session = new CourseSession("ENGL", "101", startDate);
+        startDate = createDate(2003, 1, 6);
+        session = createCourseSession();
     }
 
     public void testCreate() {
@@ -26,11 +30,13 @@ public class CourseSessionTest extends TestCase {
     public void testEnrollStudents() {
         Student student1 = new Student("Cain Divoe");
         session.enroll(student1);
+        assertEquals(CREDITS, student1.getCredits());
         assertEquals(1, session.getNumberOfStudents());
         assertEquals(student1, session.get(0));
 
         Student student2 = new Student("Coralee DeVaughn");
         session.enroll(student2);
+        assertEquals(CREDITS, student2.getCredits());
         assertEquals(2, session.getNumberOfStudents());
 
         assertEquals(student1, session.get(0));
@@ -38,7 +44,21 @@ public class CourseSessionTest extends TestCase {
     }
 
     public void testCourseDates() {
-        Date sixteenWeeksOut = DateUtil.createDate(2003, 4, 25);
+        Date sixteenWeeksOut = createDate(2003, 4, 25);
         assertEquals(sixteenWeeksOut, session.getEndDate());
+    }
+
+    public void testCount() {
+        CourseSession.resetCount();
+        createCourseSession();
+        assertEquals(1, CourseSession.getCount());
+        createCourseSession();
+        assertEquals(2, CourseSession.getCount());
+    }
+
+    private CourseSession createCourseSession() {
+        CourseSession session = CourseSession.create("ENGL", "101", startDate);
+        session.setNumberOfCredits(CREDITS);
+        return session;
     }
 }

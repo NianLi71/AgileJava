@@ -3,9 +3,9 @@ package sis.report;
 import sis.studentinfo.CourseSession;
 import sis.studentinfo.Student;
 
-public class RosterReporter {
-    static final String NEWLINE = System.getProperty("line.separator");
+import static sis.report.ReportConstant.NEWLINE;
 
+public class RosterReporter {
     static final String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "----" + NEWLINE;
 
     static final String ROSTER_REPORT_FOOTER = NEWLINE + "# Students = ";
