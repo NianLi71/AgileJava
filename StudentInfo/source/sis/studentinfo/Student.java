@@ -2,18 +2,31 @@
 
 package sis.studentinfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
     private static final String STUDENT_IN_STATE = "CO";
     private final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
-    private String name;
+    private final String name;
 
-    private int credits;
+    private int credits = 0;
 
     private String state = "";
 
+    private List<Grade> grades = new ArrayList<>();
+
+    private GradingStrategy gradingStrategy;
+
+    public enum Grade {A, B, C, D, F};
+
     public Student(String name) {
+        this(name, new RegularGradingStrategy());
+    }
+
+    public Student(String name, final GradingStrategy gradingStrategy) {
         this.name = name;
-        this.credits = 0;
+        this.gradingStrategy = gradingStrategy;
     }
 
     public String getName() {
@@ -38,5 +51,25 @@ public class Student {
 
     public boolean isInState() {
         return state.equals(STUDENT_IN_STATE);
+    }
+
+    public double getGpa() {
+        if (grades.isEmpty()) {
+            return 0.0;
+        } else {
+            double gradeSum = 0.0;
+            for (Grade grade: grades) {
+                gradeSum += gradePointsFor(grade);
+            }
+            return gradeSum / grades.size();
+        }
+    }
+
+    public void addGrade(final Grade grade) {
+        this.grades.add(grade);
+    }
+
+    private double gradePointsFor(Grade grade) {
+        return gradingStrategy.getGradePointsFor(grade);
     }
 }
