@@ -1,11 +1,8 @@
 package sis.studentinfo;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
-abstract public class Session implements Comparable<Session> {
+abstract public class Session implements Comparable<Session>, Iterable<Student> {
     private String department;
 
     private String number;
@@ -79,6 +76,11 @@ abstract public class Session implements Comparable<Session> {
         } else {
             return getDepartment().compareTo(session.getDepartment());
         }
+    }
+
+    @Override
+    public Iterator<Student> iterator() {
+        return students.iterator();
     }
 
     abstract protected int getSessionLength();

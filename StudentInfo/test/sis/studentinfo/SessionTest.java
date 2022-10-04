@@ -2,7 +2,9 @@ package sis.studentinfo;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static sis.studentinfo.DateUtil.createDate;
 
@@ -56,6 +58,18 @@ abstract public class SessionTest extends TestCase {
         CourseSession sessionD = CourseSession.create("CMSC", "210", date);
         assertTrue(sessionC.compareTo(sessionD) < 0);
         assertTrue(sessionD.compareTo(sessionC) > 0);
+    }
+
+    public void testIterate() {
+        session.enroll(new Student("1"));
+        session.enroll(new Student("2"));
+        session.enroll(new Student("3"));
+
+        List<Student> results = new ArrayList<>();
+        for (Student student: session) {
+            results.add(student);
+        }
+        assertEquals(session.getAllStudents(), results);
     }
 
     abstract protected Session createSession(String department, String number, Date startDate);
