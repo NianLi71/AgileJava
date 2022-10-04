@@ -2,20 +2,45 @@ package sis.studentinfo;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class StudentTest extends TestCase {
     private static final String STUDENT_IN_STATE = "CO";
 
     private static final double GRADE_TOLERANCE = 0.05;
     public void testCreate() {
         Student student = new Student("Jane Doe");
-        String studentName = student.getName();
+        String studentName = student.getFullName();
         assertEquals("Jane Doe", studentName);
+        assertEquals("Jane", student.getFirstName());
+        assertEquals("Doe", student.getLastName());
+        assertEquals("", student.getMiddleName());
 
-        Student secondStudent = new Student("Joe Blow");
-        String secondStudentName = secondStudent.getName();
-        assertEquals("Joe Blow", secondStudentName);
+        Student secondStudent = new Student("Blow");
+        String secondStudentName = secondStudent.getFullName();
+        assertEquals("Blow", secondStudentName);
+        assertEquals("", secondStudent.getFirstName());
+        assertEquals("Blow", secondStudent.getLastName());
+        assertEquals("", secondStudent.getMiddleName());
 
-        assertEquals("Jane Doe", student.getName());
+        Student thirdStudent = new Student("Raymond Douglas Davies");
+        assertEquals("Raymond Douglas Davies", thirdStudent.getFullName());
+        assertEquals("Raymond", thirdStudent.getFirstName());
+        assertEquals("Davies", thirdStudent.getLastName());
+        assertEquals("Douglas", thirdStudent.getMiddleName());
+    }
+
+    public void testStringSplit() {
+        String fullName = "Raymond Douglas Davies";
+        String[] stringParts = fullName.split(" ");
+        List<String> nameParts = Arrays.asList(stringParts);
+        assertEquals(3, nameParts.size());
+        assertEquals("Raymond", nameParts.get(0));
+        assertEquals("Douglas", nameParts.get(1));
+        assertEquals("Davies", nameParts.get(2));
+//        System.out.println(nameParts);
     }
 
     public void testCredits() {

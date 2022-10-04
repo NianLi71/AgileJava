@@ -3,12 +3,17 @@
 package sis.studentinfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Student {
     private static final String STUDENT_IN_STATE = "CO";
     private final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
-    private final String name;
+    private final String fullName;
+
+    private String firstName = "";
+    private String middleName = "";
+    private String lastName = "";
 
     private int credits = 0;
 
@@ -32,17 +37,32 @@ public class Student {
         }
     };
 
-    public Student(String name) {
-        this(name, new BasicGradingStrategy());
+    public Student(String fullName) {
+        this(fullName, new BasicGradingStrategy());
     }
 
-    public Student(String name, final GradingStrategy gradingStrategy) {
-        this.name = name;
+    public Student(String fullName, final GradingStrategy gradingStrategy) {
+        this.fullName = fullName;
         this.gradingStrategy = gradingStrategy;
+
+        List<String> nameParts = split(fullName);
+        setName(nameParts);
     }
 
-    public String getName() {
-        return this.name;
+    public String getFullName() {
+        return this.fullName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public boolean isFullTime() {
@@ -83,5 +103,23 @@ public class Student {
 
     private double gradePointsFor(Grade grade) {
         return gradingStrategy.getGradePointsFor(grade);
+    }
+
+    private void setName(List<String> nameParts) {
+        if (nameParts.size() == 1) {
+            this.lastName = nameParts.get(0);
+        } else if (nameParts.size() == 2) {
+            this.firstName = nameParts.get(0);
+            this.lastName = nameParts.get(1);
+        } else if (nameParts.size() == 3) {
+            this.firstName = nameParts.get(0);
+            this.middleName = nameParts.get(1);
+            this.lastName = nameParts.get(2);
+        }
+    }
+
+    private List<String> split(String fullName) {
+        final String[] parts = fullName.split(" ");
+        return Arrays.asList(parts);
     }
 }

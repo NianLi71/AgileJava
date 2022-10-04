@@ -21,7 +21,7 @@ public class RosterReporter {
         buffer.append(ROSTER_REPORT_HEADER);
 
         for (Student student: session.getAllStudents()) {
-            buffer.append(student.getName());
+            buffer.append(student.getFullName());
             buffer.append(NEWLINE);
         }
 
