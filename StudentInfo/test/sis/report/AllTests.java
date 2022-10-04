@@ -10,6 +10,8 @@ public class AllTests {
         final TestSuite suite = new TestSuite();
 
         suite.addTestSuite(RosterReporterTest.class);
+        suite.addTestSuite(CourseReportTest.class);
+        suite.addTestSuite(ReportCardTest.class);
 
         return suite;
     }

@@ -18,10 +18,22 @@ public class Student {
 
     private GradingStrategy gradingStrategy;
 
-    public enum Grade {A, B, C, D, F};
+    public enum Grade {
+        A(4.0), B(3.0), C(2.0), D(1.0), F(0.0);
+
+        private final double points;
+
+        private Grade(double points) {
+            this.points = points;
+        }
+
+        double getPoints() {
+            return  points;
+        }
+    };
 
     public Student(String name) {
-        this(name, new RegularGradingStrategy());
+        this(name, new BasicGradingStrategy());
     }
 
     public Student(String name, final GradingStrategy gradingStrategy) {

@@ -13,8 +13,9 @@ public class AllTests {
         final TestSuite suite = new TestSuite();
 
         suite.addTestSuite(StudentTest.class);
-        suite.addTestSuite(CourseSessionTest.class);
         suite.addTestSuite(DateUtilTest.class);
+        suite.addTestSuite(CourseSessionTest.class);
+        suite.addTestSuite(SummerCourseSessionTest.class);
 
         return suite;
     }
