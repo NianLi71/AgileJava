@@ -46,6 +46,14 @@ public class Student {
         this.gradingStrategy = gradingStrategy;
 
         List<String> nameParts = split(fullName);
+        final int maximumNumberOfNameParts = 3;
+        if (nameParts.size() > maximumNumberOfNameParts) {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Student name ")
+                    .append("'").append(fullName).append("'")
+                    .append(" contains more than ").append(maximumNumberOfNameParts).append(" parts");
+            throw new StudentNameFormatException(builder.toString());
+        }
         setName(nameParts);
     }
 

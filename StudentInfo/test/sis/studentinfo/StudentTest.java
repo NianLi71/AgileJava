@@ -70,6 +70,17 @@ public class StudentTest extends TestCase {
         assertFalse(student.isInState());
     }
 
+    public void testBadlyFormattedName() {
+        final String studentName = "a b c d";
+        try {
+            new Student(studentName);
+            fail("expected exception from 4-part name");
+        } catch (StudentNameFormatException e) {
+            assertEquals(String.format("Student name '%s' contains more than %d parts", studentName, 3),
+                    e.getMessage());
+        }
+    }
+
     public void testCalculateGpa() {
         Student student = new Student("a");
         assertGpa(student, 0.0);
