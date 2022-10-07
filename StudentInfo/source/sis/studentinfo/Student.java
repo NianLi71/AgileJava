@@ -5,8 +5,11 @@ package sis.studentinfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Student {
+
+    final static Logger logger = Logger.getLogger(Student.class.getName());
     private static final String STUDENT_IN_STATE = "CO";
     private final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     private final String fullName;
@@ -52,7 +55,9 @@ public class Student {
             builder.append("Student name ")
                     .append("'").append(fullName).append("'")
                     .append(" contains more than ").append(maximumNumberOfNameParts).append(" parts");
-            throw new StudentNameFormatException(builder.toString());
+            String message = builder.toString();
+            Student.logger.info(message);
+            throw new StudentNameFormatException(message);
         }
         setName(nameParts);
     }

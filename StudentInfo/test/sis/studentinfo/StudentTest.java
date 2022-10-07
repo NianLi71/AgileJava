@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
 
 public class StudentTest extends TestCase {
     private static final String STUDENT_IN_STATE = "CO";
@@ -71,14 +73,24 @@ public class StudentTest extends TestCase {
     }
 
     public void testBadlyFormattedName() {
+        Logger logger = Logger.getLogger(Student.class.getName());
+        Handler handler = new TestHandler();
+        logger.addHandler(handler);
+        Student.logger.addHandler(handler);
+
         final String studentName = "a b c d";
         try {
             new Student(studentName);
             fail("expected exception from 4-part name");
         } catch (StudentNameFormatException e) {
-            assertEquals(String.format("Student name '%s' contains more than %d parts", studentName, 3),
-                    e.getMessage());
+            String message = String.format("Student name '%s' contains more than %d parts", studentName, 3);
+            assertEquals(message, e.getMessage());
+            assertTrue(wasLogged(message, (TestHandler)handler));
         }
+    }
+
+    private boolean wasLogged(String message, TestHandler handler) {
+        return message.equals(handler.getMessage());
     }
 
     public void testCalculateGpa() {
