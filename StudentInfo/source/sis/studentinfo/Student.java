@@ -22,6 +22,8 @@ public class Student {
 
     private String state = "";
 
+    private String id;
+
     private List<Grade> grades = new ArrayList<>();
 
     private GradingStrategy gradingStrategy;
@@ -60,6 +62,14 @@ public class Student {
             throw new StudentNameFormatException(message);
         }
         setName(nameParts);
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public String getFullName() {
@@ -134,5 +144,10 @@ public class Student {
     private List<String> split(String fullName) {
         final String[] parts = fullName.split(" ");
         return Arrays.asList(parts);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Student, id: %s", id);
     }
 }

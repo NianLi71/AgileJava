@@ -17,6 +17,7 @@ public class AllTests {
         suite.addTestSuite(CourseSessionTest.class);
         suite.addTestSuite(SummerCourseSessionTest.class);
         suite.addTestSuite(ScorerTest.class);
+        suite.addTestSuite(StudentDirectoryTest.class);
 
         return suite;
     }
