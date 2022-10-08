@@ -7,12 +7,12 @@ import java.util.GregorianCalendar;
 
 public class CourseSession extends Session {
     private static int count = 0;
-    public static CourseSession create(final String department, final String number, final Date startDate) {
-        return new CourseSession(department, number, startDate);
+    public static CourseSession create(final Course course, final Date startDate) {
+        return new CourseSession(course, startDate);
     }
 
-    protected CourseSession(final String department, final String number, final Date startDate) {
-        super(department, number, startDate);
+    protected CourseSession(final Course course, final Date startDate) {
+        super(course, startDate);
         CourseSession.incrementCount();
     }
 

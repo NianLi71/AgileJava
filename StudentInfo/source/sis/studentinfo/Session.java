@@ -5,10 +5,8 @@ import java.net.URL;
 import java.util.*;
 
 abstract public class Session implements Comparable<Session>, Iterable<Student> {
-    private String department;
 
-    private String number;
-
+    private Course course;
     private ArrayList<Student> students = new ArrayList<>();
 
     private Date startDate;
@@ -17,18 +15,17 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
 
     private URL url;
 
-    protected Session(final String department, final String number, final Date startDate) {
-        this.department = department;
-        this.number = number;
+    protected Session(final Course course, final Date startDate) {
+        this.course = course;
         this.startDate = startDate;
     }
 
     public String getDepartment() {
-        return this.department;
+        return course.getDepartment();
     }
 
     public String getNumber() {
-        return this.number;
+        return course.getNumber();
     }
 
     public int getNumberOfStudents() {

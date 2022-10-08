@@ -18,7 +18,7 @@ abstract public class SessionTest extends TestCase {
 
     public void setUp() {
         startDate = createDate(2003, 1, 6);
-        session = createSession("ENGL","101", startDate);
+        session = createSession(new Course("ENGL","101"), startDate);
         session.setNumberOfCredits(CREDITS);
     }
 
@@ -47,16 +47,16 @@ abstract public class SessionTest extends TestCase {
 
     public void testComparable() {
         final Date date = new Date();
-        CourseSession sessionA = CourseSession.create("CMSC", "101", date);
-        CourseSession sessionB = CourseSession.create("ENGL", "101", date);
+        CourseSession sessionA = CourseSession.create(new Course("CMSC", "101"), date);
+        CourseSession sessionB = CourseSession.create(new Course("ENGL", "101"), date);
 
         assertTrue(sessionA.compareTo(sessionB) < 0);
         assertTrue(sessionB.compareTo(sessionA) > 0);
 
-        CourseSession sessionC = CourseSession.create("CMSC", "101", date);
+        CourseSession sessionC = CourseSession.create(new Course("CMSC", "101"), date);
         assertEquals(0, sessionA.compareTo(sessionC));
 
-        CourseSession sessionD = CourseSession.create("CMSC", "210", date);
+        CourseSession sessionD = CourseSession.create(new Course("CMSC", "210"), date);
         assertTrue(sessionC.compareTo(sessionD) < 0);
         assertTrue(sessionD.compareTo(sessionC) > 0);
     }
@@ -91,5 +91,5 @@ abstract public class SessionTest extends TestCase {
         }
     }
 
-    abstract protected Session createSession(String department, String number, Date startDate);
+    abstract protected Session createSession(Course course, Date startDate);
 }

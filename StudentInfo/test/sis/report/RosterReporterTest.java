@@ -2,6 +2,8 @@ package sis.report;
 
 import junit.framework.TestCase;
 import java.util.*;
+
+import sis.studentinfo.Course;
 import sis.studentinfo.DateUtil;
 import sis.studentinfo.Student;
 import sis.studentinfo.CourseSession;
@@ -10,7 +12,7 @@ import static sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest extends TestCase {
     public void testRosterReport() {
-        CourseSession session = CourseSession.create("ENGL", "101",
+        CourseSession session = CourseSession.create(new Course("ENGL", "101"),
                 DateUtil.createDate(2003, 1, 6));
 
         session.enroll(new Student("A"));
