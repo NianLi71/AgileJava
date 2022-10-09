@@ -1,13 +1,14 @@
 package sis.studentinfo;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-abstract public class Session implements Comparable<Session>, Iterable<Student> {
-
+abstract public class Session implements Comparable<Session>, Iterable<Student>, Serializable {
+    public static final long serialVersionUID = 2L;
     private Course course;
-    private ArrayList<Student> students = new ArrayList<>();
+    private transient List<Student> students = new ArrayList<>();
 
     private Date startDate;
 
@@ -41,7 +42,7 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
         return students.get(index);
     }
 
-    public ArrayList<Student> getAllStudents() {
+    public List<Student> getAllStudents() {
         return this.students;
     }
 

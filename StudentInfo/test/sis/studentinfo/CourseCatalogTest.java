@@ -23,12 +23,13 @@ public class CourseCatalogTest extends TestCase {
 
         session2 = new CourseSession(course2, DateUtil.createDate(2005, 1, 17));
         session2.setNumberOfCredits(5);
+        session2.enroll(new Student("a"));
 
         catalog.add(session1);
         catalog.add(session2);
     }
 
-    public void testStoreAndLoad() throws IOException {
+    public void testStoreAndLoad() throws Exception {
         final String filename = "CourseCatalogTest.testAdd.txt";
         catalog.store(filename);
         catalog.clearAll();
@@ -41,6 +42,11 @@ public class CourseCatalogTest extends TestCase {
         assertSession(session2, sessions.get(1));
     }
 
+    public void testLoadToNewVersion() throws Exception {
+        CourseCatalog catalog = new CourseCatalog();
+        catalog.load("CourseCatalogTest.testAdd.txt");
+        assertEquals(2, catalog.getSessions().size());
+    }
     public void assertSession(Session expected, Session retrieved) {
         assertNotSame(expected, retrieved);
 

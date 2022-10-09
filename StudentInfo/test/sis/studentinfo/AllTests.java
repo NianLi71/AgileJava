@@ -21,6 +21,7 @@ public class AllTests {
         suite.addTestSuite(CourseTest.class);
         suite.addTestSuite(AccountTest.class);
         suite.addTestSuite(PasswordGeneratorTest.class);
+        suite.addTestSuite(CourseCatalogTest.class);
 
         return suite;
     }
