@@ -2,12 +2,13 @@
 
 package sis.studentinfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Student {
+public class Student implements Serializable {
 
     final static Logger logger = Logger.getLogger(Student.class.getName());
     private static final String STUDENT_IN_STATE = "CO";

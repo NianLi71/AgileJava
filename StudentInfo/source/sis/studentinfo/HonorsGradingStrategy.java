@@ -1,6 +1,8 @@
 package sis.studentinfo;
 
-public class HonorsGradingStrategy extends BasicGradingStrategy {
+import java.io.Serializable;
+
+public class HonorsGradingStrategy extends BasicGradingStrategy implements Serializable {
 
     @Override
     public double getGradePointsFor(Student.Grade grade) {
