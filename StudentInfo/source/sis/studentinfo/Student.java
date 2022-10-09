@@ -42,6 +42,11 @@ public class Student {
         }
     };
 
+    public static Student findByLastName(String lastName) {
+        // just an example
+        return new Student(lastName);
+    }
+
     public Student(String fullName) {
         this(fullName, new BasicGradingStrategy());
     }
