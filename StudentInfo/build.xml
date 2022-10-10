@@ -33,6 +33,13 @@
         </java>
     </target>
 
+    <target name="runAllTests" depends="build">
+        <java classname="sis.testing.TestRunner" fork="yes">
+            <classpath refid="classpath" />
+            <!-- jvmarg value="-agentlib:hprof=heap=dump" / -->
+        </java>
+    </target>
+
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
