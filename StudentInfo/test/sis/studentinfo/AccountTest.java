@@ -28,6 +28,18 @@ public class AccountTest extends TestCase {
         assertEquals(amount, account.getBalance());
     }
 
+    public void testWithdraw() {
+        account.credit(new BigDecimal("100.00"));
+        account.withdraw(new BigDecimal("40.00"));
+        assertEquals(new BigDecimal("60.00"), account.getBalance());
+    }
+
+    public void testWithdrawInsufficientFunds() {
+        account.credit(new BigDecimal("100.00"));
+        account.withdraw(new BigDecimal("140.00"));
+        assertEquals(new BigDecimal("100.00"), account.getBalance());
+    }
+
     public void testTransactions() {
         Account account = new Account();
         account.credit(new BigDecimal("0.10"));

@@ -38,6 +38,15 @@ public class Account implements Accountable{
         transactionCount++;
     }
 
+    public void withdraw(BigDecimal amount) {
+        synchronized(this) {
+            if (amount.compareTo(balance) > 0)
+                return;
+
+            balance = balance.subtract(amount);
+        }
+    }
+
     public BigDecimal getBalance() {
         return balance;
     }

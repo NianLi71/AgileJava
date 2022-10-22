@@ -1,8 +1,11 @@
 
 package sis.search;
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class Server extends Thread {
-   private List<Search> queue = new LinkedList<Search>(); // flaw!
+   private BlockingQueue<Search> queue = new LinkedBlockingQueue<>(); // flaw!
     private final ResultsListener listener;
     public Server(ResultsListener listener) {
       this.listener = listener;
@@ -11,17 +14,24 @@ public class Server extends Thread {
 
    public void run() {
       while (true) {
-         if (!queue.isEmpty())
-            execute(queue.remove(0));
-         Thread.yield();
+         try {
+             execute(queue.take());
+         } catch (InterruptedException e) {
+             break;
+         }
       }
    }
 
-   public void add(Search search) {
-      queue.add(search);
+   public void add(Search search) throws Exception {
+      queue.put(search);
    }
+
+   public void shutdown() {
+        this.interrupt();
+   }
+
    private void execute(Search search) {
-      search.execute();
-      listener.executed(search);
+        search.execute();
+        listener.executed(search);
    }
 }
